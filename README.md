@@ -14,6 +14,20 @@ https://raw.githubusercontent.com/Jaska779/trmnl-kuvat/main/Lukkarit.png
 Osoite pysyy samana, kun tiedosto korvataan uudella samalla nimellä.
 Muutokset näkyvät raw-osoitteessa noin 5 minuutin välimuistiviiveellä.
 
+## Private plugin (automaattinen lukkari Wilmasta)
+
+Kuvan rinnalla on TRMNL private plugin -toteutus, joka päivittyy
+automaattisesti:
+
+- **Data:** `lukkari.json` — Hermes-VM:n cron ajaa `tee-lukkari-json.py`
+  päivittäin klo 17.45 (`/root/apps/trmnl-lukkari`, loki
+  `/var/log/trmnl-lukkari.log`). Skripti hakee viikon wilmai-CLI:llä ja
+  näyttää seuraavan viikon jolla on tunteja (loma-aikoina tuleva viikko).
+- **TRMNL-asetukset:** Private Plugin → strategia **Polling**, URL
+  `https://raw.githubusercontent.com/Jaska779/trmnl-kuvat/main/lukkari.json`,
+  markup tiedostosta `lukkari-markup.html` (full layout). Kuluva päivä
+  korostuu mustalla otsikolla.
+
 ## Päivitys
 
 1. Muokkaa lukkaridataa tiedostossa `tee-lukkari-svg.py` (DATA-sanakirja).
