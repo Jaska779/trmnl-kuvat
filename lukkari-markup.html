@@ -1,0 +1,82 @@
+<!-- TRMNL private plugin -markup: lasten lukujärjestys (full layout, 800x480).
+     Data: polling-strategia, lukkari.json (ks. README). Sama geometria kuin
+     Lukkarit.svg:ssä; laatikot sijoitetaan JSONin x/y/w/h-pikseleillä. -->
+<style>
+  .lk { position: relative; width: 800px; height: 480px; background: #fff;
+        font-family: inherit; color: #000; }
+  .lk * { box-sizing: border-box; }
+  .lk .abs { position: absolute; }
+  .lk .frame { left: 44px; top: 7px; width: 745px; height: 460px;
+               border: 2px solid #000; }
+  .lk .hl { left: 44px; width: 745px; height: 1px; background: #000; }
+  .lk .vl { top: 7px; width: 1px; height: 460px; background: #000; }
+  .lk .ts { top: 38px; width: 0; height: 429px;
+            border-left: 1px dashed #000; }
+  .lk .dh { top: 13px; width: 149px; text-align: center; font-size: 14px;
+            font-weight: bold; line-height: 18px; }
+  .lk .dh.today span { background: #000; color: #fff; padding: 0 8px;
+                       border-radius: 3px; }
+  .lk .sh { top: 42px; font-size: 10px; font-weight: bold;
+            text-align: center; }
+  .lk .hh { left: 0; width: 38px; text-align: right; font-size: 10px;
+            line-height: 12px; }
+  .lk .box { background: #000; color: #fff; text-align: center;
+             overflow: hidden; }
+  .lk .box .t { font-size: 9px; font-weight: bold; line-height: 9px;
+                margin-top: 4px; }
+  .lk .box .a { font-size: 12px; font-weight: bold; line-height: 14px;
+                margin-top: 3px; }
+  .lk .lunch { background: #fff; color: #000; border: 1px solid #000;
+               font-size: 9px; line-height: 9px; text-align: center;
+               display: flex; align-items: center; justify-content: center; }
+  .lk .meta { left: 44px; top: 468px; width: 745px; text-align: right;
+              font-size: 9px; }
+</style>
+
+{% assign tanaan = "now" | date: "%Y-%m-%d" %}
+<div class="lk">
+  <div class="abs frame"></div>
+  <div class="abs hl" style="top:38px"></div>
+  <div class="abs hl" style="top:59px"></div>
+  {% for r in (1..7) %}
+    {% assign hy = r | times: 51 | plus: 59 %}
+    <div class="abs hl" style="top:{{ hy }}px"></div>
+  {% endfor %}
+  {% for i in (1..4) %}
+    {% assign vx = i | times: 149 | plus: 44 %}
+    <div class="abs vl" style="left:{{ vx }}px"></div>
+  {% endfor %}
+  {% for h in (0..8) %}
+    {% assign hy = h | times: 51 | plus: 53 %}
+    {% assign hn = h | plus: 8 %}
+    <div class="abs hh" style="top:{{ hy }}px">{{ hn }}:00</div>
+  {% endfor %}
+
+  {% for day in days %}
+    {% assign x0 = forloop.index0 | times: 149 | plus: 44 %}
+    {% assign tsx = x0 | plus: 74 %}
+    <div class="abs ts" style="left:{{ tsx }}px"></div>
+    {% assign tx = x0 | plus: 37 %}
+    {% assign sx = x0 | plus: 111 %}
+    <div class="abs sh" style="left:{{ tx | minus: 20 }}px;width:40px">T</div>
+    <div class="abs sh" style="left:{{ sx | minus: 20 }}px;width:40px">S</div>
+    <div class="abs dh {% if day.date == tanaan %}today{% endif %}"
+         style="left:{{ x0 }}px"><span>{{ day.n }}</span></div>
+    {% assign cols = "T,S" | split: "," %}
+    {% for c in cols %}
+      {% assign boxes = day[c] %}
+      {% for b in boxes %}
+        {% if b.a == "Ruokatunti" %}
+          <div class="abs lunch" style="left:{{ b.x }}px;top:{{ b.y }}px;width:{{ b.w }}px;height:{{ b.h }}px">Ruokatunti</div>
+        {% else %}
+          <div class="abs box" style="left:{{ b.x }}px;top:{{ b.y }}px;width:{{ b.w }}px;height:{{ b.h }}px">
+            <div class="t">{{ b.t }}</div>
+            <div class="a">{{ b.a }}</div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+  {% endfor %}
+
+  <div class="abs meta">{{ viikko }} · päivitetty {{ paivitetty }}</div>
+</div>
