@@ -17,13 +17,15 @@ Muutokset näkyvät raw-osoitteessa noin 5 minuutin välimuistiviiveellä.
 ## Päivitys
 
 1. Muokkaa lukkaridataa tiedostossa `tee-lukkari-svg.py` (DATA-sanakirja).
-2. Generoi SVG ja PNG:
+2. Generoi SVG, renderöi 2x-koossa ja kynnystä 1-bittiseksi (kynnystys
+   poistaa antialiasoinnin harmaat, jolloin TRMNL:n dither ei rakeista):
 
 ```
 python3 tee-lukkari-svg.py
 "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
-  --disable-gpu --screenshot=Lukkarit.png --window-size=800,480 \
-  "file://$(pwd)/Lukkarit.svg"
+  --disable-gpu --force-device-scale-factor=2 --screenshot=/tmp/lukkari-2x.png \
+  --window-size=800,480 "file://$(pwd)/Lukkarit.svg"
+python3 muunna-png.py /tmp/lukkari-2x.png   # vaatii: pip install pillow
 ```
 
-3. Committaa ja pushaa.
+3. Committaa ja pushaa. Osoite pysyy samana.
