@@ -2,8 +2,12 @@
      Data: polling-strategia, lukkari.json (ks. README). Sama geometria kuin
      Lukkarit.svg:ssä; laatikot sijoitetaan JSONin x/y/w/h-pikseleillä. -->
 <style>
-  .lk { position: relative; width: 800px; height: 480px; background: #fff;
-        font-family: inherit; color: #000; }
+  /* Ohita TRMNL-kehyksen oletusreunus: asemoidaan koko ruudukko origoon
+     (absoluuttinen sijoitus ohittaa kaareen paddingin) ja nollataan
+     screen-paddingit varmuudeksi. */
+  .screen { padding: 0 !important; }
+  .lk { position: absolute; left: 0; top: 0; width: 800px; height: 480px;
+        background: #fff; font-family: inherit; color: #000; }
   .lk * { box-sizing: border-box; }
   .lk .abs { position: absolute; }
   .lk .frame { left: 44px; top: 7px; width: 745px; height: 460px;
