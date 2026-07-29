@@ -25,8 +25,9 @@ automaattisesti:
   näyttää seuraavan viikon jolla on tunteja (loma-aikoina tuleva viikko).
 - **TRMNL-asetukset:** Private Plugin → strategia **Polling**, URL
   `https://raw.githubusercontent.com/Jaska779/trmnl-kuvat/main/lukkari.json`,
-  markup tiedostosta `lukkari-markup.html` (full layout). Kuluva päivä
-  korostuu mustalla otsikolla.
+  markup tiedostosta `lukkari-markup.html` (full layout) ja
+  **"Remove bleed margin?" = Yes** (muuten 800 px leveä ruudukko leikkautuu
+  oikealta). Kuluva päivä korostuu mustalla otsikolla.
 
 ## Päivitys
 
