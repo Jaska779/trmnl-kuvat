@@ -96,6 +96,10 @@ def build_week(monday: dt.date):
 def main():
     today = dt.date.today()
     monday = today - dt.timedelta(days=today.weekday())
+    # Viikonloppuna kuluva viikko on jo ohi: lauantaista alkaen naytetaan
+    # seuraava viikko, jotta nayttoa voi katsoa tulevan viikon suunnitteluun.
+    if today.weekday() >= 5:
+        monday += dt.timedelta(days=7)
     for _ in range(5):
         days, total = build_week(monday)
         if total:
