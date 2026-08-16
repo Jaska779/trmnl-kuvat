@@ -3,8 +3,13 @@
 TRMNL-private-pluginin pollattavaksi.
 
 Ajetaan Hermes-VM:llä cronista (wilmai-auth on siellä). Skripti hakee
-kuluvan viikon; jos se on tyhjä (loma), kokeillaan enintään 4 seuraavaa
-viikkoa, jolloin tuleva lukkari näkyy jo ennen koulun alkua.
+kuluvan viikon, mutta lauantaista sunnuntaihin seuraavan: kuluva viikko on
+silloin jo ohi eikä sitä kannata näyttää. Jos viikko on tyhjä (loma),
+kokeillaan enintään 4 seuraavaa viikkoa, jolloin tuleva lukkari näkyy jo
+ennen koulun alkua.
+
+Cron: arkisin 17.45 ja lisäksi lauantaina 6.30, jotta viikonvaihto näkyy jo
+lauantaiaamuna eikä vasta illalla.
 
 Koordinaatisto on sama kuin Lukkarit.svg:ssä (800x480, tuntirivi 51 px,
 y = 59 + tunnit_klo_8_jalkeen * 51), jotta markup pysyy yksinkertaisena:

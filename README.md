@@ -20,9 +20,13 @@ Kuvan rinnalla on TRMNL private plugin -toteutus, joka päivittyy
 automaattisesti:
 
 - **Data:** `lukkari.json` — Hermes-VM:n cron ajaa `tee-lukkari-json.py`
-  päivittäin klo 17.45 (`/root/apps/trmnl-lukkari`, loki
-  `/var/log/trmnl-lukkari.log`). Skripti hakee viikon wilmai-CLI:llä ja
-  näyttää seuraavan viikon jolla on tunteja (loma-aikoina tuleva viikko).
+  päivittäin klo 17.45 ja lisäksi lauantaina klo 6.30
+  (`/root/apps/trmnl-lukkari`, loki `/var/log/trmnl-lukkari.log`). Skripti
+  hakee viikon wilmai-CLI:llä ja näyttää seuraavan viikon jolla on tunteja
+  (loma-aikoina tuleva viikko).
+- **Viikonvaihto:** kuluva viikko näytetään ma–pe, mutta lauantaista alkaen
+  seuraava viikko — kuluva on silloin jo ohi. Lauantain aamuajo on siksi,
+  ettei vaihto odottaisi iltaan asti.
 - **TRMNL-asetukset:** Private Plugin → strategia **Polling**, URL
   `https://raw.githubusercontent.com/Jaska779/trmnl-kuvat/main/lukkari.json`,
   markup tiedostosta `lukkari-markup.html` (full layout) ja
